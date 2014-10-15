@@ -14,12 +14,26 @@ class JustTest extends PHPUnit_Framework_TestCase {
         // Composition Law
     }
     public function testApplicativeLaw1() {
+        // Identity Law
+        $av = new Just(5);
+        $fn = function($x) {return $x;};
+        $af = Maybe::_pure($fn);
+        $v = new Just(5);
+        $this->assertEquals($av->apply($af), $v);
     }
     public function testApplicativeLaw2() {
+        // Homomorphism Law
+        $fn = function($x) {return $x;};
+        $af = Maybe::_pure($fn);
+        $av = Maybe::_pure(5);
+        $this->assertEquals($av->apply($af), Maybe::_pure($fn(5)));
     }
     public function testApplicativeLaw3() {
+        // Interchange Law
+
     }
     public function testApplicativeLaw4() {
+        // Composition Law
     }
     public function testMonadLaw1() {
     }
