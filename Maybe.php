@@ -38,6 +38,9 @@ class Nothing extends Maybe {
     public function fmap($f) {
         return $this;
     }
+    public function pure($v) {
+        return $this;
+    }
     public function apply($af) {
         return $this;
     }
