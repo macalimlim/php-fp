@@ -17,6 +17,9 @@ class Right extends Either {
     public function fmap($f) {
         return new Right($f($this->val));
     }
+    public function pure($v) {
+        return new Right($v);
+    }
     public function apply($af) {
         return $this->fmap($af->val);
     }
@@ -37,6 +40,9 @@ class Left extends Either {
         return $f($this->val);
     }
     public function fmap($f) {
+        return $this;
+    }
+    public function pure($v) {
         return $this;
     }
     public function apply($af) {
