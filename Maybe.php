@@ -17,6 +17,9 @@ class Just extends Maybe {
     public function fmap($f) {
         return new Just($f($this->val));
     }
+    public function pure($v) {
+        return new Maybe($v);
+    }
     public function apply($af) {
         return $this->fmap($af->val);
     }
