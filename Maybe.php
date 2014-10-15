@@ -4,6 +4,9 @@ require("Monad.php");
 
 abstract class Maybe implements Monad {
     public abstract function maybee($d, $f);
+    public static function _pure($v) {
+        return new Just($v);
+    }
 }
 
 class Just extends Maybe {
@@ -18,7 +21,7 @@ class Just extends Maybe {
         return new Just($f($this->val));
     }
     public function pure($v) {
-        return new Maybe($v);
+        return Maybe::_pure($v);
     }
     public function apply($af) {
         return $this->fmap($af->val);
