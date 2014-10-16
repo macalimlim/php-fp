@@ -400,7 +400,7 @@ abstract class AList implements Monad, Ord {
 
     public static function arrayToLinkedList($arr) {
         $xs = AList::_empti();
-        foreach ($arr as $a) {
+        foreach (array_reverse($arr) as $a) {
             $xs = $xs->cons($a);
         }
         return $xs;
@@ -408,7 +408,7 @@ abstract class AList implements Monad, Ord {
 
     public static function assocArrayToLinkedListOfPairs($arr) {
         $xs = AList::_empti();
-        foreach ($arr as $k => $v) {
+        foreach (array_reverse($arr) as $k => $v) {
             $xs = $xs->cons(new Pair($k ,$v));
         }
         return $xs;
