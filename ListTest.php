@@ -770,6 +770,19 @@ class ConsListTest extends PHPUnit_Framework_TestCase {
         $a = array(1, 2, 3);
         $this->assertEquals($cxs, $a);
     }
+
+    public function testLinkedListOfPairsToAssocArray() {
+        //
+        $xs = AList::_empti();
+        $cxs = AList::linkedListOfPairsToAssocArray($xs);
+        $a = array();
+        $this->assertEquals($cxs, $a);
+        //
+        $xs = AList::_empti()->cons(new Pair(3, "three"))->cons(new Pair(2, "two"))->cons(new Pair(1, "one"));
+        $cxs = AList::linkedListOfPairsToAssocArray($xs);
+        $a = array(1 => "one", 2 => "two", 3 => "three");
+        $this->assertEquals($cxs, $a);
+    }
 }
 
 ?>
