@@ -420,7 +420,6 @@ abstract class AList implements IIterContainer, Monad, Ord {
     public static function linkedListToArray($xs) {
         $arr = array();
         $it = $xs->iterator();
-        print_r($it->hasNext());
         while ($it->hasNext()) {
             $arr[] = $it->next();
         }
