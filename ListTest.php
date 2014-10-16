@@ -67,7 +67,7 @@ class ConsListTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($xs->head(), 3);
         //
         $xs = AList::_empti()->cons(2)->cons(1);
-        $this->assertEquals($xs->head, 1);
+        $this->assertEquals($xs->head(), 1);
     }
     /**
      * @expectedException        Exception
@@ -732,6 +732,18 @@ class ConsListTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($xs->unzip3(), $t);
     }
 
+    public function testArrayToLinkedList() {
+        //
+        $as = array();
+        $xs = AList::_empti();
+        $cas = AList::arrayToLinkedList($as);
+        $this->assertEquals($cas, $xs);
+        //
+        $as = array(1, 2, 3);
+        $xs = AList::_empti()->cons(3)->cons(2)->cons(1);
+        $cas = AList::arrayToLinkedList($as);
+        $this->assertEquals($cas, $xs);
+    }
 }
 
 ?>
