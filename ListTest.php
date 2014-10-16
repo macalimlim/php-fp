@@ -744,6 +744,14 @@ class ConsListTest extends PHPUnit_Framework_TestCase {
         $cas = AList::arrayToLinkedList($as);
         $this->assertEquals($cas, $xs);
     }
+
+    public function testAssocArrayToLinkedList() {
+        //
+        $as = array();
+        $xs = AList::_empti();
+        $cas = AList::assocArrayToLinkedListOfPairs($as);
+        $this->assertEquals($cas, $xs);
+    }
 }
 
 ?>
