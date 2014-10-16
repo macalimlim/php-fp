@@ -425,6 +425,16 @@ abstract class AList implements IIterContainer, Monad, Ord {
         }
         return $arr;
     }
+
+    public function linkedListOfPairsToAssocArray($xs) {
+        $arr = array();
+        $it = $xs->iterator();
+        while ($it->hasNext()) {
+            $p = $it->next();
+            $arr[$p->first] = $p->second;
+        }
+        return $arr;
+    }
 }
 
 class ConsList extends AList {
