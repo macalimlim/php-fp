@@ -1,13 +1,14 @@
 <?php
 
 require("Bool.php");
+require("Iterator.php");
 require("Maybe.php");
 //require("Monad.php");
 require("Ord.php");
 require("Pair.php");
 require("Triple.php");
 
-abstract class AList implements Monad, Ord {
+abstract class AList implements IIterContainer, Monad, Ord {
 
     public static function _eq($xs, $ys) {
         if (($xs instanceof ConsList) && ($ys instanceof ConsList)) {
@@ -415,6 +416,16 @@ abstract class AList implements Monad, Ord {
         }
         return $xs;
     }
+
+    public static function linkedListToArray($xs) {
+        $arr = array();
+        $it = $xs->iterator();
+        print_r($it->hasNext());
+        while ($it->hasNext()) {
+            $arr[] = $it->next();
+        }
+        return $arr;
+    }
 }
 
 class ConsList extends AList {
@@ -422,6 +433,9 @@ class ConsList extends AList {
     public function __construct($x, $xs) {
         $this->head = $x;
         $this->rest = $xs;
+    }
+    public function iterator() {
+        return new ListIterContainer($this);
     }
     public function fmap($f) {
         $this->map($f);
@@ -582,6 +596,9 @@ class ConsList extends AList {
 }
 
 class EmptyList extends AList {
+    public function iterator() {
+        return new ListIterContainer($this);
+    }
     public function fmap($f) {
         $this->map($f);
     }
@@ -737,6 +754,20 @@ class EmptyList extends AList {
     }
     public function unzip3() {
         return AList::_unzip3($this);
+    }
+}
+
+class ListIterContainer implements IIterator {
+    private $pos = 0;
+    private $coll;
+    public function __construct($c) {
+        $this->coll = $c;
+    }
+    public function hasNext() {
+        return $this->pos < $this->coll->length();
+    }
+    public function next() {
+        return $this->coll->indexAt($this->pos++);
     }
 }
 
