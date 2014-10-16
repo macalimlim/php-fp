@@ -397,6 +397,22 @@ abstract class AList implements Monad, Ord {
             return new Triple(AList::_empti(), AList::_empti(), AList::_empti());
         }
     }
+
+    public static function arrayToLinkedList($arr) {
+        $xs = AList::_empti();
+        foreach ($arr as $a) {
+            $xs = $xs->cons($a);
+        }
+        return $xs;
+    }
+
+    public static function assocArrayToLinkedListOfPairs($arr) {
+        $xs = AList::_empti();
+        foreach ($arr as $k => $v) {
+            $xs = $xs->cons(new Pair($k ,$v));
+        }
+        return $xs;
+    }
 }
 
 class ConsList extends AList {
@@ -407,6 +423,8 @@ class ConsList extends AList {
     }
     public function fmap($f) {
         $this->map($f);
+    }
+    public function pure($v) {
     }
     public function apply($af) {
         $af->fold(function($s, $f) {
@@ -565,6 +583,8 @@ class EmptyList extends AList {
     public function fmap($f) {
         $this->map($f);
     }
+    public function pure($v) {
+    }
     public function apply($af) {
         $af->fold(function($s, $f) {
             return $_append($s, $this->fmap($f));
@@ -716,10 +736,6 @@ class EmptyList extends AList {
     public function unzip3() {
         return AList::_unzip3($this);
     }
-}
-
-function arrayToLinkedList($arr) {
-
 }
 
 ?>
