@@ -13,8 +13,11 @@ class IO implements Monad {
     public function apply($af) {
         return $this->fmap($af->val);
     }
-    public function ret($v) {
+    public static function _ret($v) {
         return new IO($v);
+    }
+    public function ret($v) {
+        return IO::_ret($v);
     }
     public function bind($f) {
         return $f($this->val);
