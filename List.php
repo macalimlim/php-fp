@@ -1,13 +1,5 @@
 <?php
 
-require("Bool.php");
-require("Iterator.php");
-require("Maybe.php");
-//require("Monad.php");
-require("Ord.php");
-require("Pair.php");
-require("Triple.php");
-
 abstract class AList implements IIterContainer, Monad, Ord {
 
     public static function _eq($xs, $ys) {

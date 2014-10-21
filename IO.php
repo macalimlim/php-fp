@@ -1,7 +1,5 @@
 <?php
 
-require("Monad.php");
-
 class IO implements Monad {
     public $val;
     public function __construct($v) {
