@@ -1,7 +1,5 @@
 <?php
 
-require_once("Monad.php");
-
 abstract class Either implements Monad {
     public abstract function either($f, $g);
 }
