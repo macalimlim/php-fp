@@ -8,6 +8,9 @@ class IO implements Monad {
     public function fmap($f) {
         return new IO($f($this->val));
     }
+    public function pure($v) {
+        return new IO($v);
+    }
     public function apply($af) {
         return $this->fmap($af->val);
     }
