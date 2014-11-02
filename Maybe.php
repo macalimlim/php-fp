@@ -1,7 +1,5 @@
 <?php
 
-require("Monad.php");
-
 abstract class Maybe implements Monad {
     public abstract function maybee($d, $f);
     public static function _pure($v) {
